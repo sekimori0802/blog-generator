@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ記事ジェネレーター</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ブログ記事ジェネレーター</h1>
+            <p>Google Geminiを使用して、高品質なブログ記事を自動生成します</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <form id="blogForm">
+                    <div class="form-group">
+                        <label for="topic">トピック</label>
+                        <input type="text" id="topic" name="topic" required 
+                               placeholder="例：最新のAI技術トレンド">
+                    </div>
+                    <button type="submit" class="generate-btn">記事を生成</button>
+                </form>
+            </div>
+
+            <div class="output-section">
+                <div id="loading" class="loading hidden">生成中...</div>
+                <div id="blogContent" class="blog-content"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Google Gemini API</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
