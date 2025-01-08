@@ -32,7 +32,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data.status === 'success') {
                 // 生成された記事を表示
-                blogContentElement.innerHTML = formatBlogContent(data.content);
+                // マークダウンテキストをHTMLに変換
+                let formattedContent = data.content
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // 太字
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>') // イタリック
+                    .replace(/# (.*?)\n/g, '<h1>$1</h1>\n') // h1
+                    .replace(/## (.*?)\n/g, '<h2>$1</h2>\n') // h2
+                    .replace(/- (.*?)(?:\n|$)/g, '<li>$1</li>') // リスト項目
+                    .replace(/<li>.*?<\/li>/gs, match => `<ul>${match}</ul>`); // リストのラッピング
+
+                // 段落の処理
+                formattedContent = formattedContent
+                    .split('\n\n')
+                    .map(paragraph => {
+                        // すでにHTMLタグが含まれている場合はそのまま
+                        if (paragraph.trim().startsWith('<')) {
+                            return paragraph;
+                        }
+                        // 空の段落は無視
+                        if (!paragraph.trim()) {
+                            return '';
+                        }
+                        // 通常の段落をpタグで囲む
+                        return `<p>${paragraph}</p>`;
+                    })
+                    .join('\n');
+
+                blogContentElement.innerHTML = formattedContent;
             } else {
                 throw new Error(data.message || 'エラーが発生しました');
             }

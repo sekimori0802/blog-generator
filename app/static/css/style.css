@@ -116,6 +116,34 @@ input[type="text"]:focus {
     line-height: 1.8;
 }
 
+.blog-content h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 1.5rem 0;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.blog-content h2 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin: 1.2rem 0;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+}
+
+.blog-content strong {
+    color: var(--primary-color);
+}
+
+.blog-content em {
+    color: var(--secondary-color);
+}
+
+.blog-content p {
+    margin: 1rem 0;
+}
+
 footer {
     text-align: center;
     margin-top: 3rem;
